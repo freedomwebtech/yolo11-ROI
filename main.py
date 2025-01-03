@@ -4,8 +4,7 @@ import numpy as np
 from ultralytics import YOLO
 import cvzone
 import numpy as np
-from ultralytics.solutions.solutions import BaseSolution
-from ultralytics.utils.plotting import Annotator, colors
+
 
 def RGB(event, x, y, flags, param):
     if event == cv2.EVENT_MOUSEMOVE:
