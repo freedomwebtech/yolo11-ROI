@@ -23,7 +23,6 @@ names=model.names
 # Open the video file (use video file or webcam, here using webcam)
 cap = cv2.VideoCapture('pcount.mp4')
 count=0
-area=[(523,281),(161,330),(267,449),(848,429)]
 
 
 while True:
@@ -51,20 +50,11 @@ while True:
         list=[]
         for box, class_id, track_id, conf in zip(boxes, class_ids, track_ids, confidences):
             c = names[class_id]
-            if 'person' in c:
-                x1, y1, x2, y2 = box
-                cx=int(x1+x2)//2
-                cy=int(y1+y2)//2
-                result=cv2.pointPolygonTest(np.array(area,np.int32),((cx,cy)),False)
-                if result>=0:
-                   cv2.circle(frame,(cx,cy),4,(0,0,255),-1)
-                   cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
-                   cvzone.putTextRect(frame,f'{track_id}',(x1,y1),1,1)
-                   list.append(track_id)
-                   
-    cv2.polylines(frame,[np.array(area,np.int32)],True,(255,0,0),2)
-    c=len(list)
-    cvzone.putTextRect(frame,f'{c}',(50,60),2,2)
+            x1, y1, x2, y2 = box
+            cv2.rectangle(frame,(x1,y1),(x2,y2),(0,255,0),2)
+            cvzone.putTextRect(frame,f'{track_id}',(x1,y1),1,1)
+                  
+ 
 
     cv2.imshow("RGB", frame)
     if cv2.waitKey(0) & 0xFF == ord("q"):
