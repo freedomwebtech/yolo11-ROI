@@ -47,7 +47,6 @@ while True:
         class_ids = results[0].boxes.cls.int().cpu().tolist()  # Class IDs
         track_ids = results[0].boxes.id.int().cpu().tolist()  # Track IDs
         confidences = results[0].boxes.conf.cpu().tolist()  # Confidence score
-        list=[]
         for box, class_id, track_id, conf in zip(boxes, class_ids, track_ids, confidences):
             c = names[class_id]
             x1, y1, x2, y2 = box
